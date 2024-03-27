@@ -140,7 +140,24 @@ public:
 		}
 		return count;
 	}
+	String& operator+=(const String& rhs)
+	{
+		int new_size = size + rhs.size - 1;
+		char* new_text = new char[new_size];
+		for (int i = 0; i < size - 1; ++i)
+		{
+			new_text[i] = text[i];
+		}
+		for (int i = 0; i < rhs.size; ++i)
+		{
+			new_text[size - 1 + i] = rhs.text[i];
+		}
+		delete[] text;
+		text = new_text;
+		size = new_size;
 
+		return *this;
+	}
 private:
 	char* text;
 	int size;
